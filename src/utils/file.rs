@@ -12,9 +12,13 @@ pub fn read_ints(path: PathBuf) -> Vec<i32> {
         .collect();
 }
 
-pub fn read_strings(path: PathBuf) -> Vec<String> {
+pub fn read_strings_sep(path: PathBuf, separator: &str) -> Vec<String> {
     return read_input_file(path)
-        .lines()
+        .split(separator)
         .map(|line| String::from(line.trim()))
         .collect();
+}
+
+pub fn read_strings(path: PathBuf) -> Vec<String> {
+    return read_strings_sep(path, "\n");
 }
