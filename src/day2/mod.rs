@@ -37,7 +37,7 @@ fn part2(input: &Vec<String>) -> i32 {
         let high_char = password.chars().nth(high - 1);
         let low_match = low_char == Some(character);
         let high_match = high_char == Some(character);
-        
+
         if low_match as i8 + high_match as i8 == 1 {
             correct_count += 1;
         }

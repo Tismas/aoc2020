@@ -2,6 +2,7 @@ use std::env;
 
 mod day1;
 mod day2;
+mod day3;
 
 pub mod utils;
 
@@ -11,12 +12,14 @@ fn main() {
     if args.len() < 2 {
         day1::solve();
         day2::solve();
+        day3::solve();
         return;
     }
 
     match args[1].as_str() {
         "day1" => day1::solve(),
         "day2" => day2::solve(),
+        "day3" => day3::solve(),
         _ => println!("Incorrect day, example: day1")
     }
 }
