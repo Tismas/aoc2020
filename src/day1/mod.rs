@@ -24,16 +24,16 @@ fn find_sum_equal(elements: &Vec<i32>, sum: i32) -> Option<(i32, i32)> {
 }
 
 fn part1(input: &Vec<i32>) -> i32 {
-    let sum_elements = find_sum_equal(input, 2020).unwrap();
-    return sum_elements.0 * sum_elements.1;
+    let (low, high) = find_sum_equal(input, 2020).unwrap();
+    return low * high;
 }
 
 fn part2(input: &Vec<i32>) -> i32 {
     for x in input {
         let sum_elements = find_sum_equal(input, 2020 - x);
         if sum_elements.is_some() {
-            let unwrapped = sum_elements.unwrap();
-            return x * unwrapped.0 * unwrapped.1;
+            let (low, high) = sum_elements.unwrap();
+            return x * low * high;
         }
     }
     return -1;
@@ -42,8 +42,8 @@ fn part2(input: &Vec<i32>) -> i32 {
 pub fn solve() {
     let input = utils::file::read_ints(PathBuf::from(file!()));
 
-    println!("Part 1: {}", part1(&input));
-    println!("Part 2: {}", part2(&input));
+    println!("Day 1 Part 1: {}", part1(&input));
+    println!("Day 1 Part 2: {}", part2(&input));
 }
 
 #[cfg(test)]
