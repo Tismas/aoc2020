@@ -2,27 +2,15 @@ use crate::utils;
 use std::path::PathBuf;
 
 fn get_seat_id(location_data: &String) -> i32 {
-    let mut min_row = 0;
-    let mut max_row = 127;
-    let mut min_col = 0;
-    let mut max_col = 7;
-
-    for hint in location_data.chars() {
-        if hint == 'F' {
-            max_row -= ((max_row - min_row) as f32 / 2.0).ceil() as i32;
-        } else if hint == 'B' {
-            min_row += ((max_row - min_row) as f32 / 2.0).ceil() as i32;
-        } else if hint == 'L' {
-            max_col -= ((max_col - min_col) as f32 / 2.0).ceil() as i32;
-        } else if hint == 'R' {
-            min_col += ((max_col - min_col) as f32 / 2.0).ceil() as i32;
-        }
-    }
-
-    assert_eq!(min_row, max_row);
-    assert_eq!(min_col, max_col);
-
-    return min_row * 8 + min_col;
+    return i32::from_str_radix(
+        &location_data
+            .replace("F", "0")
+            .replace("B", "1")
+            .replace("L", "0")
+            .replace("R", "1"),
+        2,
+    )
+    .unwrap();
 }
 
 fn part1(input: &Vec<String>) -> i32 {
@@ -65,8 +53,8 @@ fn part2(input: &Vec<String>) -> i32 {
 pub fn solve() {
     let input = utils::file::read_strings(PathBuf::from(file!()));
 
-    println!("Day 2 Part 1: {}", part1(&input));
-    println!("Day 2 Part 2: {}", part2(&input));
+    println!("Day 5 Part 1: {}", part1(&input));
+    println!("Day 5 Part 2: {}", part2(&input));
 }
 
 #[cfg(test)]
